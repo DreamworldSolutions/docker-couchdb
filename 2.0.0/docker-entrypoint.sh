@@ -24,7 +24,7 @@ if [ "$1" = '/opt/couchdb/bin/couchdb' ]; then
 	chmod 775 /opt/couchdb/etc/*.d
 
 	if [ ! -z "$NODENAME" ] && ! grep "couchdb@" /opt/couchdb/etc/vm.args; then
-		echo "-name couchdb@$NODENAME" >> /opt/couchdb/etc/vm.args
+		echo "-sname couchdb@$NODENAME" >> /opt/couchdb/etc/vm.args
 	fi
 
 	if [ "$COUCHDB_USER" ] && [ "$COUCHDB_PASSWORD" ]; then
