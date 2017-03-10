@@ -24,7 +24,11 @@ if [ "$1" = '/opt/couchdb/bin/couchdb' ]; then
 	chmod 775 /opt/couchdb/etc/*.d
 
 	if [ ! -z "$NODENAME" ] && ! grep "couchdb@" /opt/couchdb/etc/vm.args; then
-		echo "-sname couchdb@$NODENAME" >> /opt/couchdb/etc/vm.args
+            if [ -z "$COUCHDB_COOKIE" ]; then
+                echo "-sname couchdb@$NODENAME" >> /opt/couchdb/etc/vm.args
+            else
+    		echo "-sname couchdb@$NODENAME -setcookie '$COUCHDB_COOKIE'" >> /opt/couchdb/etc/vm.args
+ 	    fi
 	fi
 
 	if [ "$COUCHDB_USER" ] && [ "$COUCHDB_PASSWORD" ]; then
